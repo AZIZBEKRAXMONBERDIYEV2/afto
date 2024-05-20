@@ -15,6 +15,17 @@ from .serializers import TaskSerializer, UserSerializer
 
 
 
+
+
+def get_product(request: Response) -> Request:
+            products = Aftosalon.objects.filter(model='Oppo')
+            data = []
+            for product in products:
+                data.append(product.to_dict())
+            return Response(data, safe=False)
+
+
+
 class TaskList(APIView):
 
 
@@ -34,7 +45,7 @@ class TaskList(APIView):
 
     def delete(self , request : Request ,   pk):
         
-        data = Aftosalon.objects.filter(id=pk).delete()
+        Aftosalon.objects.filter(id=pk).delete()
         # print()
         return Response({"aftosalon_delete" : "oK"})
     
@@ -51,10 +62,74 @@ class TaskList(APIView):
           return Response(serializer.data)
       return Response(serializer.errors, status=400)
     
-    def get(self, request: Request, pk: int) -> Response:
-        task = Aftosalon.objects.filter(id=pk)
-        if task is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = TaskSerializer(task)
-        return Response(serializer.data)
-              
+
+    
+    def get(self,request:Response,model=None , brent=None , rang=None , pk=None , yil=None , narx=None , min_narx=None,max_narx=None  ) ->Request:
+            if model:
+                    product = Aftosalon.objects.filter(model__contains = model)
+                    data = []
+                    for i in product:
+                        data.append(i.to_dict())
+                        
+                    
+                    return Response( data=data)
+            
+            elif brent:
+                    product = Aftosalon.objects.filter(brent = brent)
+                    data = []
+                    for i in product:               
+                        data.append(i.to_dict())
+                    return Response(data=data)
+            
+
+            elif rang:
+                    product = Aftosalon.objects.filter(rang = rang)
+                    data = []
+                    for i in product:               
+                        data.append(i.to_dict())
+                    return Response(data=data)
+            
+
+            elif pk:
+                    product = Aftosalon.objects.filter(id = pk)
+                    data = []
+                    for i in product:               
+                        data.append(i.to_dict())
+                    return Response(data=data)
+            
+
+            elif yil:
+                    product = Aftosalon.objects.filter(yil = yil)
+                    data = []
+                    for i in product:               
+                        data.append(i.to_dict())
+                    return Response(data=data)
+            
+
+            elif narx:
+                    product = Aftosalon.objects.filter(narx = narx)
+                    data = []
+                    for i in product:               
+                        data.append(i.to_dict())
+                    return Response(data=data)
+            
+
+            elif min_narx and max_narx:
+                products = Aftosalon.objects.filter(narx__gte=min_narx, narx__lte=max_narx)
+            elif min_narx:
+                products = Aftosalon.objects.filter(narx__gte=min_narx)
+            elif max_narx:
+                products = Aftosalon.objects.filter(narx__lte=max_narx)
+
+                data = []
+                for product in products:
+                    data.append(product.to_dict())
+
+                return Response(data=data)
+                
+            else:
+                product = Aftosalon.objects.all()
+                data = []
+                for i in product:
+                        data.append(i.to_dict())
+                return Response({"data":data})
