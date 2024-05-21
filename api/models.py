@@ -16,10 +16,6 @@ class Aftosalon(models.Model):
         return f"{self.brent} {self.model} {self.rang} {self.yil}"
     
 
-
-
-
-
     def to_dict(self):
         """
         Convert model to dictionary

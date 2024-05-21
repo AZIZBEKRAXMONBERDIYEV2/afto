@@ -7,11 +7,9 @@ urlpatterns = [
     path('all/' , TaskList.as_view()),
     path('get/<int:pk>/' , TaskList.as_view()),
     path('model/<model>/' , TaskList.as_view()),
-    path('get_narx/<int:pk>/' , TaskList.as_view()),
     path('rang/<rang>/' , TaskList.as_view()),
-    path('min_narx_max/<int:min>/<int:max>/' , TaskList.as_view()),
     path('brent/<brent>/' , TaskList.as_view()),
     path('yil/<int:yil>/' , TaskList.as_view()),
     path('narx/<int:narx>/' , TaskList.as_view()),
-    
+     
 ]
