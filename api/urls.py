@@ -12,4 +12,5 @@ urlpatterns = [
     path('yil/<int:yil>/' , TaskList.as_view()),
     path('narx/<int:narx>/' , TaskList.as_view()),
      
+    
 ]
