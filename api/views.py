@@ -17,12 +17,7 @@ from .serializers import TaskSerializer, UserSerializer
 
 
 
-def get_product(request: Response) -> Request:
-            products = Aftosalon.objects.filter(model='Oppo')
-            data = []
-            for product in products:
-                data.append(product.to_dict())
-            return Response(data, safe=False)
+
 
 
 
